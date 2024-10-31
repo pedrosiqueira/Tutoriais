@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>VS Code Tutorial</title>
+    <style>
+        code {
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>VS Code Tutorial</h1>
+    <h2>Atalhos que mais utilizo</h2>
+    <p>O mais importante de todos os atalhos é <kbd>f1</kbd>, pois ele abre um campo de busca em que você pode procurar por qualquer ação/comando do VSCode.</p>
+    <p>(Observação: atalhos para o teclado layout ABNT2).</p>
+    <ul>
+        <li><kbd>ctrl+p</kbd> Procura um arquivo no workspace atual.</li>
+        <li><kbd>ctrl+r</kbd> Procura um arquivo recentemente aberto.</li>
+        <li><kbd>ctrl+shift+o</kbd> Procura por um símbolo no arquivo atual.</li>
+        <li><kbd>ctrl+t</kbd> Procura por um símbolo no workspace atual.</li>
+        <li><kbd>ctrl+mouse1</kbd> Vai para a declaração do símbolo clicado.</li>
+        <li><kbd>f2</kbd> Renomeia o símbolo atual.</li>
+        <li><kbd>ctrl+g</kbd> Vai para uma linha específica.</li>
+        <li><kbd>alt+left</kbd> Volta o cursor para onde estava anteriormente.</li>
+        <li><kbd>alt+right</kbd> Avança o cursor para onde estava posteriormente.</li>
+        <li><kbd>ctrl+;</kbd> Alterna comentário nas linhas selecionadas.</li>
+        <li><kbd>ctrl+.</kbd> Correção de código.</li>
+        <li><kbd>ctrl+space</kbd> Sugestão de código.</li>
+        <li><kbd>ctrl+k ctrl+i</kbd> Exibe documentação.</li>
+        <li><kbd>ctrl+shift+space</kbd> Exibe dicas de parâmetros.</li>
+        <li><kbd>ctrl+d</kbd> Seleciona a palavra atual. Teclando múltiplas vezes, vai selecionando a mesma palavra no decorrer do arquivo.</li>
+        <li><kbd>alt+mouse1</kbd> Adiciona um cursor onde clicou. Esse atalho não é editável. Se não funcionar, acesse o menu "Selection &#8594; Switch to Ctrl+Click for Multi-Cursor".</li>
+        <li><kbd>ctrl+shift+mouse1</kbd> (linux) ou <kbd>ctrl+alt+mouse1</kbd> (windows). Seleção retangular.</li>
+        <li><kbd>ctrl+shift+up</kbd> (linux) ou <kbd>ctrl+alt+up</kbd> (windows). Adiciona um cursor na linha superior.</li>
+        <li><kbd>ctrl+shift+down</kbd> (linux) ou <kbd>ctrl+alt+down</kbd> (windows). Adiciona um cursor na linha inferior.</li>
+        <li><kbd>ctrl+u</kbd> Volta o cursor para a última posição.</li>
+        <li><kbd>alt+shift+left/right</kbd> Expande/encolhe seleção atual.</li>
+        <li><kbd>ctrl+enter</kbd> Cria uma linha embaixo e vai para ela.</li>
+        <li><kbd>ctrl+l</kbd> Seleciona uma linha inteira.</li>
+        <li><kbd>ctrl+shift+e</kbd> Abre a aba de arquivos.</li>
+        <li><kbd>ctrl+shift+g</kbd> Abre a aba de versionamento de código.</li>
+        <li><kbd>ctrl+shift+x</kbd> Abre a aba de extensões.</li>
+        <li><kbd>ctrl+b</kbd> Alterna a visibilidade da aba lateral.</li>
+        <li><kbd>ctrl+h</kbd> Abre o campo de substituição de palavras.</li>
+        <li><kbd>ctrl+alt+enter</kbd> Substitui todas as palavras do campo de substituição.</li>
+        <li><kbd>ctrl+,</kbd> Abre as configurações.</li>
+        <li><kbd>ctrl+j</kbd> Alterna a visibilidade do terminal.</li>
+        <li><kbd>ctrl+shift+up</kbd> (linux) ou <kbd>ctrl+alt+pgup</kbd> (windows) Sobe uma linha no terminal.</li>
+        <li><kbd>ctrl+shift+down</kbd> (linux) ou <kbd>ctrl+alt+pgdown</kbd> (windows) Desce uma linha no terminal.</li>
+        <li><kbd>alt+shift+right</kbd> Expande a seleção.</li>
+        <li><kbd>alt+shift+left</kbd> Encolhe a seleção.</li>
+        <li><kbd>ctrl+shift+[</kbd> Expande trecho atual.</li>
+        <li><kbd>ctrl+shift+´</kbd> Encolhe trecho atual.</li>
+        <li><kbd>ctrl+k ctrl+-</kdb> Encolhe tudo menos trecho atual.</li>
+        <li><kbd>ctrl+k ctrl+0</kbd> Encolher tudo.</li>
+        <li><kbd>ctrl+k ctrl+j</kbd> Expandir tudo.</li>
+    </ul>
+
+    <h2>Atalhos comuns a outros editores de texto</h2>
+    <ul>
+        <li><kbd>ctrl+c</kbd> Copia o que estiver selecionado. Se nada estiver selecionado, copia a linha atual.</li>
+        <li><kbd>ctrl+x</kbd> Recorta o que estiver selecionado. Se nada estiver selecionado, recorta a linha atual.</li>
+        <li><kbd>ctrl+v</kbd> Cola o que foi copiado ou recortado.</li>
+        <li><kbd>ctrl+backspace/delete</kbd> Apaga palavra antes/depois do cursor.</li>
+        <li><kbd>home/end</kbd> Vai para início/final da linha.</li>
+        <li><kbd>ctrl+home/end</kbd> Vai para início/depois do documento.</li>
+        <li><kbd>shift+home/end</kbd> Seleciona o que está antes/depois do cursor na mesma linha.</li>
+        <li><kbd>ctrl+shift+home/end</kbd> Seleciona o que está antes/depois do cursor no documento.</li>
+        <li><kbd>setas</kbd> Navega pelos caracteres.</li>
+        <li><kbd>ctrl+setas</kbd> Navega pelas palavras.</li>
+        <li><kbd>shift+setas</kbd> Seleciona por caractere.</li>
+        <li><kbd>ctrl+shift+setas</kbd> Seleciona por palavras.</li>
+        <li><kbd>ctrl+a</kbd> Seleciona tudo.</li>
+        <li><kbd>ctrl+s</kbd> Salva arquivo atualmente aberto.</li>
+        <li><kbd>ctrl+tab</kbd> Troca para próxima aba.</li>
+        <li><kbd>ctrl+shift+tab</kbd> Troca para aba anterior.</li>
+        <li><kbd>alt+n</kbd> Troca para nª aba, sendo n um número.</li>
+        <li><kbd>f11</kbd> Alterna tela cheia.</li>
+
+    </ul>
+
+    <h2>Atalhos personalizados</h2>
+    <p>Muitas ações não vêm com um atalho associado, ou pode ser que você queira mudar o atalho de determinada ação. Para explorar e editar todos os atalhos, tecle <kbd>f1</kbd>, digite "shortcut", e escolha a opção "Open Keyboard Shortcuts". Atalhos personalizados são salvos num arquivo JSON citado na seção <a href="#configurando-alguns-atalhos">Configurando alguns atalhos</a>.</p>
+
+    <h2>Dicas</h2>
+    <ul>
+        <li>Ao criar um arquivo (atalho ctrl+n), você pode passar o caminho do arquivo, que, se não existir, o vscode já cria pra você.</li>
+        <li>"Leitura Obrigatória" para quem trabalha com HTML: <a href="https://docs.emmet.io/abbreviations/syntax/">Plugin Emmet já instalado no VSCode para edição de HTML</a>.</li>
+    </ul>
+
+    <h2>Configurando o VS Code</h2>
+    <p>Ao abrir o menu de configurações (<kbd>ctrl+,</kbd>), você pode procurar por qualquer configuração digitando no campo de busca. Por exemplo, para ativar a quebra virtual automática de linhas, ao digitar "wrap", deve aparecer uma configuração "Editor: Word Wrap", onde você pode alterar para "on".</p>
+    <p>Configurações personalizadas são salvas num arquivo JSON, que no Linux fica localizado em <code>~/.config/Code/User/settings.json</code>. Para abrir o arquivo de configurações, você também pode teclar <kbd>f1</kbd>, digitar "sett js", e selecionar "Preferences: Open User Settings (JSON)". Eu, particularmente, gosto dessas configurações personalizadas, use-as se lhe convir:</p>
+    <pre>
+    {
+        "editor.wordWrap": "on", // habilita quebra virtual de linhas
+        "editor.mouseWheelZoom": true, // altera o zoom com a rodinha do mouse
+        "editor.unicodeHighlight.nonBasicASCII": false, // não destaca palavras com acento
+        "workbench.editor.empty.hint": "hidden", // desativa mensagem chata quando cria novo arquivo
+        "security.workspace.trust.enabled": "false", // confia em qualquer diretório por padrão
+        "html.format.wrapLineLength": 0 // não quebra linhas do html automaticamente
+    }
+</pre>
+
+    <h2 id="configurando-alguns-atalhos">Configurando alguns atalhos</h2>
+    <p>Abra o arquivo de atalhos (configuração "Open Keyboard Shortcuts (JSON)" ou caminho <code>~/.config/Code/User/keybindings.json</code> se estiver no linux) para configurar os atalhos. Coloque os seguintes atalhos que lhe convir:</p>
+    <pre>// Place your key bindings in this file to override the defaultsauto[]
+[
+    { // indenta código
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    { // aumenta o tamanho da fonte apenas do código // ctrl+oem_plus no windows
+        "key": "ctrl+=",
+        "command": "editor.action.fontZoomIn"
+    },
+    { // diminui o tamanho da fonte apenas do código // ctrl+oem_minus no windows
+        "key": "ctrl+-",
+        "command": "editor.action.fontZoomOut"
+    },
+    { // exibe o arquivo ativo na aba explorer
+        "key": "ctrl+1",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    { // foca na aba explorer quando nenhum arquivo estiver ativo
+        "key": "ctrl+1",
+        "command": "workbench.view.explorer",
+        "when": "!editorTextFocus"
+    },
+    { // envolve o texto selecionado ou a linha atual em uma tag html
+        "key": "ctrl+alt+1",
+        "command": "editor.emmet.action.wrapWithAbbreviation"
+    },
+    { // tem que ter um jeito mais fácil de deletar linha
+        "key": "ctrl+alt+x",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    { // voltar o cursor para onde estava
+        "key": "alt+left",
+        "command": "workbench.action.navigateBack"
+    },
+    { // avançar o cursor para onde estava
+        "key": "alt+right",
+        "command": "workbench.action.navigateForward",
+        "when": "canNavigateForward"
+    },
+    { // copia o caminho do arquivo atual
+        "key": "ctrl+alt+c",
+        "command": "copyFilePath",
+        "when": "editorFocus"
+    },
+    { // alterna comentário na(s) linha(s) selecionada(s)
+        "key": "ctrl+;",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    { // alterna a visibilidade da barra de atividades (barra lateral) // "ctrl+abnt_c1" no windows
+        "key": "ctrl+/",
+        "command": "workbench.action.toggleActivityBarVisibility"
+    },
+    { // sobrescreve comando do windows. mas no linux já é esse
+        "key": "ctrl+shift+up",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
+    { // sobrescreve comando do windows. mas no linux já é esse
+        "key": "ctrl+shift+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    { // encerra o terminal atual
+        "key": "ctrl+k delete",
+        "command": "workbench.action.terminal.kill"
+    },
+    { // alterna maximização do painel
+        "key": "ctrl+f10",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    { // remap toggle bold on extension yzhang.markdown-all-in-one
+        "key": "ctrl+k b",
+        "command": "markdown.extension.editing.toggleBold",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    { // remap toggle bold on extension yzhang.markdown-all-in-one
+        "key": "ctrl+b",
+        "command": "-markdown.extension.editing.toggleBold",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    }
+]</pre>
+
+    <h2>Extensões</h2>
+    <p>Para instalar um extensão, basta abrir a aba de extensões (<kbd>ctrl+shift+x</kbd>) e digitar o nome da extensão. Vamos exemplificar instalando a extensão <a href="https://marketplace.visualstudio.com/items?itemName=rioj7.select-by">rioj7.select-by</a>. Essa extensão habilita atalhos para buscar textos usando regex. Depois abra o arquivo de configurações (<code>~/.config/Code/User/settings.json</code> ou ação "Open Settings (JSON)") e adicione o seguinte código:</p>
+    <pre>
+    , "selectby.regexes": { // https://stackoverflow.com/a/63061477/4072641
+        "goToNextTag": {
+            "moveby": "&lt;.*?&gt;|.(?=&lt;.*?&gt;)"
+        },
+        "goToPreviousTag": {
+            "moveby": "&lt;.*?&gt;|.(?=&lt;.*?&gt;)"
+        }
+    },
+    </pre>
+    <p>Esse código adiciona duas configurações, <code>goToNextTag</code> e <code>goTopreviousTag</code>, que movem o cursor para o início/final da próxima/anterior tag. Agora, vamos mapear os atalhos <kbd>ctrl+alt+.</kbd> e <kbd>ctrl+alt+,</kbd> para essas duas novas configurações, respectivamente. Adicione o seguinte código no <a href="#configurando-alguns-atalhos">arquivo de atalhos</a>:</p>
+    <pre>
+    , { // https://stackoverflow.com/a/63061477/4072641
+        "key": "ctrl+alt+.", // go to next, whatever keybinding you want
+        "command": "moveby.regex",
+        "args": [
+            "goToNextTag",
+            "moveby",
+            "next",
+            "end",
+            "wrap"
+        ],
+        "when": "editorTextFocus && editorLangId == html" // if html only
+    },
+    { // https://stackoverflow.com/a/63061477/4072641
+        "key": "ctrl+alt+,", // go to previous
+        "command": "moveby.regex",
+        "args": [
+            "goToPreviousTag",
+            "moveby",
+            "prev",
+            "end",
+            "wrap"
+        ],
+        "when": "editorTextFocus && editorLangId == html" // if html only
+    }
+    </pre>
+
+    <p>Experimente criar ou abrir um arquivo HTML pelo VSCode e navegar rapidamente pelas tags usando os atalhos configurados.</p>
+</body>
+
+</html>

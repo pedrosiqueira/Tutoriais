@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Docker Cheatsheet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css" integrity="sha512-q9B+BRcW0p2dRy94K1it1sy2Dv9UkAqIYoAUcWQY7Pis6fcQSAe5lohmJiymUL5glkr+Gu8fEVW6UjNKz6qm3A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css" integrity="sha512-lbsxQPIivlFg4R1HzWzroF+nQRivTblPWXEVKbbCbCeT+w9XJoC4B9cCpZQvcXxd0s8Nooe4YjbB7rYq5RoUkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js" integrity="sha512-Z5dAQyvO8EyY1cHQcqYTYL8z6PDjM0URql6AioNodsSxxTJS5Fqfujr+o/4ye2dLp0he1qAVTiZABTunv6oLow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js" integrity="sha512-1sgIP38qm/y/33QFXdgSgBinVscLgnICy//6P5vVGaT/NyK2zZfsbLtrz/pPnix5CbEImM88s4HHxDFEHBcINg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushBash.min.js" integrity="sha512-XR1ABUcL7xkYUR862NzvqMwFghNwXaTbVAxckXmcRindUdHmPC0RV0iBX6XxE405/wZbXavz17Tu2DyHAXvMyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js" integrity="sha512-M61BF19oSP8HD/7e0YE1sUNReuNpHuAF5yB3C6YgsLsRxlAF1aMTyZaGSeeXZU35j6LOyKRLrRcvia7RLNSBGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js" integrity="sha512-XHSgk11LDMG/R4L6Tn9cl4xbwbO5dnsgJrtXd/oT6KVf00wqAog2wY8j3kySxmxRoiBAxON5lZZW9fqHj2CE7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js" integrity="sha512-UYSg4vizNRvEp+m59O9HFYRVjKzC+a2RVlZsj9vOXbmiCMZtneIIu3gh3eXfNfxGhk7sixse+MAjhpMx8N33RA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPython.min.js" integrity="sha512-qXMeu3Es/N9kQ70FTkm9d+qkTjLV+RxZOH75B2a93Uu6UMpe/qzM8y2taR+Y+Z6bUbSEj9KK4ZMW5vVGKBox9A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Highlight all -->
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+        SyntaxHighlighter.defaults.toolbar = false;
+    </script>
+
+    <style>
+        code {
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Docker Cheatsheet</h1>
+    <p>Fonte: <a href="https://youtu.be/yb2udL9GG2U">youtu.be/yb2udL9GG2U</a></p>
+
+    <h2>Visão Geral</h2>
+
+    <p><strong>Por que container?</strong></p>
+    <p>(fonte: <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers</a>.)</p>
+
+    <p>Independentemente de você implantar em containers ou não, os containers são um ótimo ambiente de desenvolvimento porque você pode:</p>
+    <ul>
+        <li>Desenvolver com uma cadeia de ferramentas consistente e facilmente reproduzível no mesmo sistema operacional em que você implanta.</li>
+        <li>Trocar rapidamente entre ambientes de desenvolvimento diferentes e separados e fazer atualizações com segurança sem se preocupar em impactar sua máquina local.</li>
+        <li>Facilitar para novos membros/contribuidores da equipe começar a trabalhar em um ambiente de desenvolvimento consistente.</li>
+        <li>Experimentar novas tecnologias ou clonar uma cópia de uma base de código sem afetar sua configuração local.</li>
+    </ul>
+
+    <p><strong>Diferença entre imagem e container</strong></p>
+    <p>(fonte: <a href="https://phoenixnap.com/kb/docker-image-vs-container">https://phoenixnap.com/kb/docker-image-vs-container</a></p>
+
+    <p>Uma imagem do Docker é um arquivo imutável que contém código-fonte, bibliotecas, dependências, ferramentas e outros arquivos necessários para executar um aplicativo. Devido à sua característica somente leitura, essas imagens às vezes são chamadas de snapshots. Elas representam um aplicativo e seu ambiente virtual em um momento específico.</p>
+
+    <p>Como as imagens são, de certa forma, apenas templates, você não pode iniciá-las ou executá-las. O que você pode fazer é usar esse template como base para construir um container. Um container é, em última análise, apenas uma imagem em execução. Um container é como uma cópia read-write de uma imagem, sendo que pode haver vários containers gerados a partir de uma imagem.</p>
+
+    <p>Um container permite isolar aplicativos do sistema subjacente. Esses containers são unidades compactas e portáteis nas quais você pode iniciar um aplicativo de maneira rápida e fácil. Uma vantagem de containers é a padronização do ambiente computacional executando dentro do container. Isso não apenas garante uma forma de seu aplicativo funcionar sempre em circunstâncias idênticas, mas também simplifica o compartilhamento com outros colegas de equipe. Como os containers são autônomos, outra vantagem é que eles fornecem um forte isolamento, garantindo que não interrompam outros containers em execução, bem como o sistema que os suporta. Portanto, você não terá que se preocupar em manter sua máquina segura enquanto desenvolve um aplicativo.</p>
+
+
+    <h2>Principais comandos</h2>
+    <p>No Linux, em geral, o comando <code>docker</code> deve ser executado como root (<code>sudo</code>). A seguir, uns dos comandos mais utilizados do docker.</p>
+    <ul>
+        <li><code>docker pull ubuntu</code>. Baixa do repositório oficial a última versão da imagem do ubuntu.</li>
+        <li><code>docker inspect ubuntu</code>. Exibe informações detalhadas da imagem do ubuntu instalada no computador.</li>
+        <li><code>docker build -t username/imagename pasta</code>. Constrói uma imagem com o nome <code>username/imagename</code> a partir do Dockerfile localizado na pasta <code>pasta</code>.</li>
+        <li><code>docker run --name nginx -d -p 8080:80 nginx</code>. Cria e executa o container nginx, apelidando-o de nginx (<code>--name</code>), executando em segundo plano, ou modo dettached (<code>-d</code>), mapeando a porta 8080 do computador para a porta 80 do container (<code>-p</code>). Se a imagem do container não estiver disponível, tenta baixá-la do repositório oficial para assim conseguir criar o container.</li>
+        <li><code>docker exec -it nginx bash</code>. Executa no container em execução <code>nginx</code> o comando <code>bash</code> no modo interativo. A opção <code>-i</code> mantém o STDIN aberto e <code>-t</code> habilita uma interface com o terminal da máquina host. Mais <a href="https://stackoverflow.com/a/66498756/4072641">informações aqui</a>.</li>
+        <li><code>docker run --name postgres-container -d -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword postgres</code>. Cria e executa o container postgres, apelidando-o de postgres-container (<code>--name</code>), executando em modo dettached (<code>-d</code>), mapeando a porta 5432 do computador para a porta 5432 do container (<code>-p</code>), definindo a variável de ambiente POSTGRES_PASSWORD como mysecretpassword (<code>-e</code>). Se a imagem do container não estiver disponível, tenta baixá-la do repositório oficial para assim conseguir criar o container. Por padrão, é criado o superusuário postgres e o banco de dados postgres. É possível alterar as informações de nome de usuário e de banco de dados definindo as variáveis de ambiente POSTGRES_USER e POSTGRES_DB. Mais informações <a href="https://hub.docker.com/_/postgres/">aqui</a>.</li>
+        <li><code>docker exec -it postgres-container psql -U postgres -W</code>. Executa no container em execução <code>postgres-container</code> o comando <code>psql -U postgres -W</code>, que abre o cliente psql, usando postgres como usuário (<code>-U</code>), e solicitando senha (<code>-W</code>) logo em seguida.</li>
+        <li><code>docker ps</code>. Exibe os containers em execução. Para exibir todos os containers criados, adicione a opção <code>-a</code>.</li>
+        <li><code>docker stop id</code>. Interrompe o container <code>id</code> em execução.</li>
+        <li><code>docker start id</code>. Executa o container <code>id</code> atualmente parado. Para executar o container em primeiro plano, use as opções <code>-ai</code>.</li>
+        <li><code>docker attach id</code>. Traz para o primeiro plano o container sendo executado em segundo plano (anexa os STDIN, STDOUT e STDERR da máquina host ao container em execução).</li>
+        <li>Para voltar um container para o segundo plano da sua máquina host (detached), use o atalho <kbd>Ctrl</kbd>+<kbd>p</kbd> seguido de <kbd>Ctrl</kbd>+<kbd>q</kbd>.</li>
+        <li><code>docker rm id</code>. Exclui o container <code>id</code>.</li>
+        <li><code>docker images</code>. Exibe todas as imagens instaladas no computador.</li>
+        <li><code>docker rmi img</code>. Exclui a imagem <code>img</code>.</li>
+        <li><code>docker login</code>. Autentica com sua conta do <a href=hub.docker.com>hub.docker.com</a>.</li>
+        <li><code>docker push username/imagename</code>. Envia tua imagem à tua conta do <a href=hub.docker.com>hub.docker.com</a>. Observe que o nome da imagem deve ser teu nome de usuário seguido de uma barra seguida de um nome.</li>
+    </ul>
+
+    <h2>O Dockerfile</h2>
+    <p>O Docker pode criar imagens automaticamente lendo as instruções de um <code>Dockerfile</code>. Um <code>Dockerfile</code> é um arquivo de texto que contém todas as instruções usadas para montar uma imagem. Abra uma pasta para seu projeto de teste, por exemplo, a pasta <code>tutorial-docker</code> (crie-a se não existir). Crie o arquivo <code>Dockerfile</code> dentro da pasta:</p>
+
+    <pre class="brush: plain;">
+        FROM python:3.8
+
+        WORKDIR /code
+        
+        COPY . .
+        
+        ENV MYVAR="Bem vindo!"
+        
+        RUN python -m pip install --upgrade pip
+        RUN echo $MYVAR
+        
+        ENTRYPOINT ["python", "args.py"]
+        
+        CMD ["Hello", "World"]
+    </pre>
+
+    <p>Cada instrução <a href="https://docs.docker.com/engine/reference/builder">significa o seguinte</a>:</p>
+    <ul>
+        <li><code>FROM</code> declara a imagem que essa imagem depende. Aqui, vamos usar o Python 3.8. Se não informar a versão, então a última versão disponível será usada.</li>
+        <li><code>WORKDIR</code> define a pasta de trabalho (onde serão copiados os arquivos, e criadas novas pastas).</li>
+        <li><code>COPY</code> copia os arquivos da pasta atual da máquina host (<code>.</code>) para dentro da pasta <code>WORKDIR</code> (<code>.</code>) da imagem.</li>
+        <li><code>ENV</code> cria uma variável de ambiente com determinado valor.</li>
+        <li><code>RUN</code> executa um comando ao criar a imagem e os resultados desse comando são gravados nessa imagem. Nesse caso, simplesmente estamos atualizando o pip e escrevendo "Bem vindo!" no terminal.</li>
+        <li><code>ENTRYPOINT</code> executa um comando ao criar um container dessa imagem. Pode haver apenas uma instrução <code>ENTRYPOINT</code> no Dockerfile.</li>
+        <li><code>CMD</code> segue as mesmas regras de <code>ENTRYPOINT</code>, com a diferença que se passarmos argumentos na instrução <code>docker run</code>, esses argumentos sobrescreverão os valores de <code>CMD</code> definidos no Dockerfile (não é possível sobrescrever <code>ENTRYPOINT</code> com <code>docker run</code>, a menos que use a opção <code>--entrypoint</code>).</li>
+    </ul>
+
+    <p><code>ENTRYPOINT</code> e <code>CMD</code> podem ser usados da seguinte maneira:</p>
+    <ul>
+        <li>Se só houver o <code>CMD</code>, toda vez que um container iniciar, será executado o comando de <code>CMD</code>, mas que pode ser substituído pelos valores passados através de <code>docker run</code>.</li>
+        <li>Se só houver o <code>ENTRYPOINT</code>, toda vez que um container iniciar, será executado o comando de <code>ENTRYPOINT</code>, que não pode ser substituído, mas os valores passados através do <code>docker run</code> serão argumentos para o comando de <code>ENTRYPOINT</code>.</li>
+        <li>Se houver ambos <code>ENTRYPOINT</code> e <code>CMD</code>, toda vez que um container iniciar, será executado o comando de <code>ENTRYPOINT</code>, passando por padrão os valores de <code>CMD</code> como argumentos. Nesse caso, serão passados os argumentos "Hello" e "World" à instrução <code>python args.py</code>. Mas os argumentos de <code>CMD</code> podem ser substituídos por outros valores passados através do <code>docker run</code>.</li>
+    </ul>
+
+    <p>Crie o arquivo <code>args.py</code> na pasta do Dockerfile:</p>
+
+    <pre class="brush: python">
+        import sys
+
+        print('Number of arguments:', len(sys.argv), 'arguments.')
+        print('Argument List:', str(sys.argv))
+    </pre>
+
+    <p>Esse script em Python simplesmente exibe os argumentos passados como parâmetro. Gere a imagem desse Dockerfile (<code>docker build -t teste/teste .</code>) e execute o container da imagem gerada (<code>docker run --name teste teste/teste</code>). O container executará o script <code>args.py</code>. Experimente criar outro container passando algum argumento, e.g, <code>docker run --name teste2 teste/teste Olá Mundo</code>. Observe que os argumentos "Hello" e "World" em <code>CMD</code> foram sobrescritos por "Olá" e "Mundo". Você pode sobrescrever o <code>ENTRYPOINT</code>, mas o <code>CMD</code> não será usado: <code>docker run --name teste3 --entrypoint echo teste/teste</code> (observe que o echo é executado mas os valores "Hello" e "World" de <code>CMD</code> são ignorados). Para usar a opção <code>--entrypoint</code> com argumentos, é necessário informá-los: <code>docker run --name teste4 --entrypoint echo teste/teste novos argumentos</code>. Se você tentar exibir a variável <code>$MYVAR</code> definida no Dockerfile, ela não será reconhecida: <code>docker run --name teste teste/teste $MYVAR</code>. Isso acontece porque, por padrão, <code>ENTRYPOINT</code> e <code>CMD</code> executam fora do shell onde as variáveis foram declaradas com <code>ENV</code>. Para saber como acessar em <code>ENTRYPOINT</code> e <code>CMD</code> as variáveis declaradas com <code>ENV</code>, clique <a href="https://stackoverflow.com/a/69529996/4072641">aqui</a>.</p>
+
+    <h2>O Docker Compose</h2>
+    <p>Um arquivo <code>docker-compose.yaml</code> gerencia diversos containers docker. <a href="https://docs.docker.com/compose/gettingstarted/">Clique aqui</a> para saber mais sobre o docker-compose.</p>
+
+    <h2>Processos</h2>
+    <p>Como a proposta do Docker é isolar aplicativos em um ambiente padrão, ao criar um container, ele é associado a um aplicativo ou processo através das instruções <code>ENTRYPOINT</code> e/ou <code>CMD</code> do Dockerfile). Quando o aplicativo se encerra, não há mais sentido manter o container ativo, logo, ele também é encerrado. Por exemplo, se você inspecionar o valores de <code>ENTRYPOINT</code> e <code>CMD</code> da imagem oficial do ubuntu do docker (<code>docker inspect -f '{{.Config.Entrypoint}}{{.Config.Cmd}}' ubuntu</code>), verá que não há nada para <code>ENTRYPOINT</code> e que <code>CMD</code> possui o valor <code>bash</code>. Isso quer dizer que ao iniciar um container ubuntu sem argumentos, será executado o bash. Veja alguns exemplos de criação de containers do ubuntu:</p>
+
+    <ul>
+        <li><code>docker run --name tmp1 ubuntu</code>. Cria e executa um container da imagem do ubuntu. Por padrão, o processo associado à imagem do ubuntu é o bash. Mas como não há nenhum <a href="https://www.tutorialworks.com/why-containers-stop/#why-a-docker-container-terminates">terminal atribuído ao bash</a>, o bash é encerrado, e consequentemente, o container também é encerrado. Se você tentar reiniciá-lo no modo interativo, também não vai funcionar, pois logo após sua inicialização, também já é encerrado: <code>docker start -ai tmp1</code>. Após esse comando, se executar o comando <code>docker ps</code>, observe que <code>tmp1</code> não estará sendo executado. Logo, acaba sendo um container inútil.</li>
+        <li><code>docker run --name tmp2 -it ubuntu</code>. Nesse caso, a opção (<code>-t</code>) atribui o terminal da máquina host ao bash do container, que conseguirá ser aberto ao inicializar o container. Assim, o container permanecerá executando. Se você sair do bash do container (comando <code>exit</code>), como era ele que mantinha o container ativo, então o container será encerrado. Agora, porém, você consegue reiniciá-lo no modo interativo (<code>docker start -ai tmp2</code>) ou em segundo plano (<code>docker start tmp2</code>).</li>
+        <li><code>docker run --name tmp3 -it ubuntu echo hello</code>. Associa o comando <code>echo hello</code> ao container (sobrescreve o comando <code>bash</code> padrão). Assim, tão logo o container executa esse comando, ele já encerra. Também é um exemplo de container inútil, mesmo com a opção <code>-it</code>.</li>
+        <li><code>docker run --name tmp4 -dt ubuntu</code>. Como o terminal da máquina host foi atribuído ao bash (<code>-t</code>), o container permanecerá ativo, mas em segundo plano (<code>-d</code>).</li>
+    </ul>
+
+    <h2>Armazenamento</h2>
+    Você pode montar pastas da máquina host em pastas dos containers. Há duas formas de montar pastas, <code>bind</code> e <code>volume</code>.
+
+    <h3>Bind</h3>
+    <p>Quando você usa uma montagem do tipo <code>bind</code>, um arquivo ou pasta na máquina host é montado em um container. Por outro lado, quando você usa um <code>volume</code>, uma nova pasta é criada na pasta de armazenamento do Docker na máquina host e o Docker gerencia o conteúdo dessa pasta. Ao vincular (<code>bind</code>) um arquivo ou pasta da máquina host, se ainda não existir, o Docker o cria.
+
+    <p>Considere um caso em que você tenha uma pasta <code>source/</code> e que, ao compilar o código-fonte, os artefatos sejam salvos em outra pasta, <code>source/target/</code>. Você deseja que os artefatos estejam disponíveis no container em <code>/app/</code> e deseja que o container tenha acesso aos novos artefatos toda vez que compilar o código-fonte seu host de desenvolvimento. Dentro da pasta <code>source/</code>, use o seguinte comando para vincular a pasta <code>target/</code> do host à pasta <code>/app/</code> do container: <code>docker run -d -it --name devtest -v "$(pwd)"/target:/app nginx</code>.</p>
+
+    <p>Para montar via <code>bind</code>, é necessário passar o caminho absoluto da pasta host. Por isso do uso do subcomando <code>$(pwd)</code>, que expande para o caminho absoluto da pasta atual do host. Como teste, crie arquivos dentro de <code>source/target/</code> e liste-os no container, e vice-versa.</p>
+
+    <h2>Volume</h2>
+    <p>As montagens <code>bind</code> são muito mais eficientes e simples de usar. Entretanto, a Docker recomenda considerar o uso de volumes. Enquanto as montagens <code>bind</code> dependem da estrutura de pastas e do sistema operacional da máquina host, volumes são totalmente gerenciados pelo Docker. Os volumes têm várias vantagens em relação a <code>binds</code>:</p>
+
+    <ul>
+        <li>Você pode gerenciar volumes usando comandos CLI do Docker ou a API do Docker.</li>
+        <li>Volumes funcionam em containers Linux e Windows.</li>
+        <li>Volumes podem ser compartilhados com mais segurança entre vários contêineres.</li>
+        <li>Os drivers de volume permitem criptografar o conteúdo de volumes, armazenar volumes em hosts remotos ou provedores na nuvem, ou adicionar outras funcionalidades.</li>
+        <li>Novos volumes podem ter seu conteúdo pré-populados por um container.</li>
+    </ul>
+
+    <p>Além disso, volumes costumam ser uma escolha melhor do que persistir dados na camada gravável de um container, pois um volume não aumenta o tamanho dos containers que o utilizam e o conteúdo do volume existe fora do ciclo de vida de um determinado container.</p>
+
+    <p>Alguns comandos relacionados a volumes:</p>
+    <ul>
+        <li><code>docker volume create my-vol</code>. Cria um volume com o nome <code>my-vol</code>. Volumes são criados na pasta <code>/var/lib/docker/volumes/myvol2</code> da máquina host. Apenas usuário root possui acesso de leitura e escrita nos volumes.</li>
+        <li><code>docker volume ls</code>. Lista os volumes existentes.</li>
+        <li><code>docker volume rm my-vol</code>. Remove um volume existente.</li>
+        <li><code>docker run -d --name devtest -v myvol2:/app/ nginx:latest</code>. Cria o container <code>devtest</code>, e monta o volume <code>myvol2</code> na pasta <code>/app/</code> do container. Se o volume não existir, ele é criado. Na opção <code>-v</code>, para diferenciar <code>volume</code> de <code>bind</code>, se iniciar com uma barra é <code>bind</code> (caminho absoluto começa com barra).</li>
+    </ul>

@@ -1,0 +1,23 @@
+atalhos do davinci resolve
+
+shift+v: select clip at current playhead
+shift+z: zoom all video
+m: marker. se estiver em cima do marker, abre opções do marker, como apagar ou editar
+alt+m: delete selected marker
+→/←: avança/retrocede frame
+↓/↑: próximo/anterior clip
+shift+→/←: avança/retrocede 1 segundo
+shift+↓/↑: próximo/anterior marker
+espaço: play
+ctrl+b: corta clip selecionado
+ctrl+scroll: timeline pan
+alt+scroll: timeline zoom
+i: marca início da seleção
+o: marca final da seleção
+alt+x: remove marcadores de início e final da seleção
+shift+l: fast forward
+l: normal speed timeline
+shift+k: play slow
+shift+j: fast reverse
+shift+r: freeze frame
+ctrl+r: retime control

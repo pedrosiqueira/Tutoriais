@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tutorial Raspberry Pi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css" integrity="sha512-q9B+BRcW0p2dRy94K1it1sy2Dv9UkAqIYoAUcWQY7Pis6fcQSAe5lohmJiymUL5glkr+Gu8fEVW6UjNKz6qm3A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css" integrity="sha512-lbsxQPIivlFg4R1HzWzroF+nQRivTblPWXEVKbbCbCeT+w9XJoC4B9cCpZQvcXxd0s8Nooe4YjbB7rYq5RoUkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js" integrity="sha512-Z5dAQyvO8EyY1cHQcqYTYL8z6PDjM0URql6AioNodsSxxTJS5Fqfujr+o/4ye2dLp0he1qAVTiZABTunv6oLow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushBash.min.js" integrity="sha512-XR1ABUcL7xkYUR862NzvqMwFghNwXaTbVAxckXmcRindUdHmPC0RV0iBX6XxE405/wZbXavz17Tu2DyHAXvMyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js" integrity="sha512-M61BF19oSP8HD/7e0YE1sUNReuNpHuAF5yB3C6YgsLsRxlAF1aMTyZaGSeeXZU35j6LOyKRLrRcvia7RLNSBGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Highlight all -->
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+        SyntaxHighlighter.defaults.toolbar = false;
+    </script>
+
+    <style>
+        code {
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tutorial Raspberry Pi</h1>
+
+    <h2>Identificando o IP e o MAC do Raspberry Pi</h2>
+
+    <p>Para saber o IP e o MAC do Raspberry Pi (raspi), execute o comando <code>ip addr show</code>. A saída gerada será algo como:</p>
+
+    <pre>
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+        inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+        inet6 ::1/128 scope host 
+            valid_lft forever preferred_lft forever
+    2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+        link/ether b8:27:eb:b9:c5:f9 brd ff:ff:ff:ff:ff:ff
+    3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+        link/ether b8:27:eb:ec:90:ac brd ff:ff:ff:ff:ff:ff
+        inet 10.8.6.141/21 brd 10.8.7.255 scope global wlan0
+            valid_lft forever preferred_lft forever
+        inet6 fe80::aa5a:4960:efba:d39/64 scope link 
+            valid_lft forever preferred_lft forever
+    </pre>
+
+    <p>A interface de rede <code>wlan0</code> representa o wifi. Dependendo do linux, a interface de wifi pode ser chamada de <code>wlp3s0</code>. Neste exemplo, o IP é <code>10.8.6.141</code> e o MAC é <code>b8:27:eb:b9:c5:f9</code>.</p>
+
+    <p>Caso o raspi esteja conectado na mesma rede que outro computador, para este computador saber o endereço IP do raspi, basta <a href="https://www.raspberrypi.com/documentation/computers/remote-access.html#resolving-raspberrypi-local-with-mdns">executar o comando</a> <code>ping raspberrypi.local</code>, sendo raspberrypi.local o hostname padrão do raspi (se não foi alterado). Esse comando serve tanto para Linux quanto para Windows. Se o raspi estiver acessível, o ping mostrará seu endereço IP:</p>
+
+    <pre>
+    PING raspberrypi.local (10.8.6.141): 56 data bytes
+    64 bytes from 10.8.6.141: icmp_seq=0 ttl=255 time=2.618 ms
+    </pre>
+
+    <p>O IP (que por padrão é dinâmico) pode ser alterado se o raspi reconectar à rede, mas o MAC sempre será o mesmo. O endereço MAC de todos os dispositivos raspi começa com <code>B8:27:EB</code>. Uma alternativa para descobrir o IP do raspi a partir de outro pc é o comando <code>sudo arp-scan --interface wlan0 --localnet | grep b8:27:eb</code>, que varre todos os dispositivos da mesma rede, exibindo seus IPs e MACs, porém, o grep filtra apenas do MAC desejado. Caso necessário, instale o programa <code>arp-scan</code>.</p>
+
+    <p>Em sistemas *nix, <a href="https://raspberrypi.stackexchange.com/questions/13936/find-raspberry-pi-address-on-local-network">outra forma</a> de descobrir o IP do raspi é através do comando <code>sudo nmap -sP 192.168.0.0/24 | awk '/^Nmap/{ip=$NF}/B8:27:EB/{print ip}'</code>, onde <code>192.168.0.*</code> é sua máscara de rede local.</p>
+
+    <p>No Windows, você pode executar pelo PowerShell: <code>arp -a | Select-String b8-27-eb</code>.</p>
+
+    <h2>Conectando um pc ao Raspberry Pi</h2>
+
+    <p>Para conectar ao raspi via <code>ssh</code>, primeiramente a opção <code>ssh</code> deve ser ativada no raspi através do comando <code>sudo raspi-config</code>, opções <b>Interfacing Options → SSH → Yes</b>. Outra opção ativar o ssh é conectar o cartão sd no computador, e criar um arquivo de nome "ssh", sem extensão, na pasta raiz do seu cartão SD ("boot"). Não se esqueça de ligar/desligar o raspi apenas com o cartão sd já inserido.</p>
+
+    <p>Depois, em outra máquina, conecte ao raspi através do comando <code>ssh pi@10.8.6.141</code>, sendo <code>pi</code> o nome de usuário do raspi e <code>10.8.6.141</code> o IP do raspi, como exemplo.</p>
+
+    <p>Para conectar com X forwarding, execute o comando <code>ssh pi@10.8.6.141 -X</code>, que te permite executar aplicativos X remotos que abrem suas janelas em tua tela local e vice-versa, executar aplicativos locais em telas remotas. Mas é necessário habilitar o X forwarding no pc remoto, como <a href="https://unix.stackexchange.com/a/12772/366802">explicado aqui</a>.</p>
+
+    <p>Você pode ativar o modo vnc do raspi, para poder acessá-lo graficamente, através do comando <code>sudo raspi-config</code>, opções <b>Interfacing Options → VNC → Yes</b>. Com o vnc ativado, acesse o raspi graficamente através de outro computador usando um cliente vnc (recomendável o RealVNC, o mesmo já instalado no raspi). Para mais informações de acesso vnc, <a href="https://www.raspberrypi.org/documentation/remote-access/vnc/">consulte aqui</a>.</p>
+
+    <h2>Conectando um pc ao Raspberry Pi via cabo de rede</h2>
+
+    <p>Para conectar Ubuntu Linux ao raspi <a href="https://www.youtube.com/watch?v=8qleH35Kgjk">usando o cabo ethernet</a>:</p>
+
+    <ol>
+        <li>Abra o editor de conexões com o comando <code>nm-connection-editor</code>.</li>
+        <li>Clique em "Adicionar conexão".</li>
+        <li>Escolha o tipo de conexão "Ethernet".</li>
+        <li>Dê o nome "RaspberryPi" à tua conexão.</li>
+        <li>Na aba "ipv4 settings", escolha o método "shared to other computers".</li>
+        <li>Na aba "ipv6 settings", escolha o método "ignore".</li>
+        <li>Salve e feche a janela.</li>
+        <li>Conecte o raspi ao pc com o cabo ethernet.</li>
+        <li>Verifique se a conexão foi estabelecida, se não, clique no nome da conexão q você deu no passo 4.</li>
+        <li>Descubra o ip ethernet do raspi com o comando <code>sudo arp-scan -interface eth0 -localnet</code>, ou o comando <code>sudo arp-scan -interface enp2s0 -localnet</code>.</li>
+        <li>Agora é so acessar o raspi via ssh com o comando <code>ssh pi@[ip descoberto no passo 11]</code>!</li>
+    </ol>
+
+    <p>Para conectar Windows 10 ao Raspberry Pi <a href="https://www.youtube.com/watch?v=AJ7skYS5bjI">usando o cabo ethernet</a>:</p>
+    <ol>
+        <li>Conecte o cabo de rede no raspi e no windows.</li>
+        <li>Acesse "Painel de controle" -> "Central de Rede e Compartilhamento" -> "Conexões: Wi-Fi (nome-da-rede)" -> "Propriedades" -> "Compartilhamento" -> "Permitir que outros usuários da rede se conectem..." -> "Conexão de rede doméstica: Ethernet". Depois feche as janelas.</li>
+        <li>Acesse "Painel de controle" -> "Central de Rede e Compartilhamento". Se você ver uma "Rede não identificada" com conexão Ethernet, então seu raspi se conectou ao windows.</li>
+        <li>Descubra o ip ethernet do raspi com o comando <code>arp -a | Select-String b8-27-eb</code>.</li>
+        <li>Agora é so acessar o raspi via ssh com o comando <code>ssh pi@[ip descoberto no passo 11]</code>!</li>
+    </ol>
+
+    <h2>Montando uma pasta do Raspberry Pi no PC</h2>
+
+    <p>Você pode montar remotamente uma pasta do raspi no pc usando um explorador de arquivos (como o nautilius ou o nemo), e assim, conseguir abrir a pasta usando sua IDE preferida. Acesse o endereço <code>sftp://10.8.6.141/home/pi</code> pela barra de endereços do teu explorador de arquivos para montar a pasta <code>home</code> do raspi no seu pc.</p>
+
+    <p>Alternativa ao sftp para montar uma pasta remota do raspi numa pasta local do pc: <code>sshfs pi@10.8.6.141:/home/pi /home/pedro/pi/</code>. Aqui montamos a pasta <code>/home/pi</code> do raspi na pasta <code>/home/pedro/pi</code> do computador local. Para desmontar a pasta: <code>fusermount -u /home/pedro/pi</code>.</p>
+
+    <p>Outra alternativa é usar a extensão <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a> do Visual Studio Code (vscode) e montar a pasta diretamente dentro do vscode.</p>
+
+    <h2>Conectando o Raspberry Pi ao WiFi</h2>
+
+    <p>Para conectar o raspi via wifi numa <a href="https://www.miskatonic.org/2019/04/24/networkingpi">rede WPA2 Enterprise</a>, PEAP, TTLS, MSCHAPv2, adicione a configuração da rede diretamente no arquivo <code>/etc/wpa_supplicant/wpa_supplicant.conf</code>...</p>
+
+    <pre>
+    network={
+        ssid="NOME-DA-REDE"
+        proto=RSN
+        key_mgmt=WPA-EAP
+        pairwise=CCMP
+        auth_alg=OPEN
+        eap=PEAP
+        identity="NOME-DO-USUARIO"
+        password="SENHA-DO-USUARIO"
+        phase1="peaplabel=0"
+        phase2="auth=MSCHAPV2"
+        priority=25
+    }        
+    </pre>
+
+    <p>... substituindo os dados <code>NOME-DA-REDE</code>, <code>NOME-DO-USUARIO</code> e <code>SENHA-DO-USUARIO</code> pelos dados apropriados.</p>
+
+    <p>Para não deixar a senha acessível no arquivo, você pode gerar um hash da senha com o comando <code>cat | iconv -t utf16le | openssl md4</code>. Digite a senha deseja, em seguida, tecle Ctrl+d para continuar (não tecle Enter, a menos que queira um '\n' na senha). A saída será algo como <code>SENHA-DO-USUARIO(stdin)= d3ad4ec10f2400caae1788671fefd366</code>. Aí é só substituir o dado <code>SENHA-DO-USUARIO</code> no arquivo <code>wpa_supplicant.conf</code> por <code>hash:d3ad4ec10f2400caae1788671fefd366</code>.</p>
+
+    <p>Para conectar o raspi via wifi numa rede WPA2-PSK, adicione a configuração:</p>
+
+    <pre>
+    network={
+        ssid="NOME-DA-REDE"
+        psk="SENHA-DA-REDE"
+        key_mgmt=WPA-PSK
+        priority=50
+    }
+    </pre>
+
+    <p>Para gerar a configuração com o <a href="https://unix.stackexchange.com/a/278958/366802">hash da senha</a> você pode usar o comando <code>wpa_passphrase 'NOME-DA-REDE'</code>. Digite tua senha, em seguida, pode teclar Ctrl+d ou Enter (diferente do anterior, esse programa descarta o Enter da senha).</p>
+
+    <h2>Postagens interessantes</h2>
+
+    <p>keywords palavras-chaves: Raspberry Pi; raspi; Leitor biométrico; impressão digital; trava elétrica; fechadura elétrica</p>
+
+    <p>Repositório do nosso projeto (onde ficarão nossos códigos): https://github.com/PedroSiqueira/SCAR</p>
+
+    <p>Artigo científico com projeto similar ao nosso. Bom para se inspirar quando for escrever o artigo: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4801596/</p>
+
+    <p>Ensinando a comunicar pelas portas GPIO (pinos) do raspi: https://www.embarcados.com.br/raspberry-pi-ios-python/</p>
+
+    <p>Postagem do Bastian, que desenvolveu o driver em python que conecta ao sensor fingerprint. Contém um FAQ interessante e ensina a instalar o driver e a conectar o sensor fingerprint usando um adaptador USB: https://sicherheitskritisch.de/2015/03/fingerprint-sensor-fuer-den-raspberry-pi-und-debian-linux-en/</p>
+
+    <p>Site do driver python que conecta ao sensor fingerprint: https://github.com/bastianraschke/pyfingerprint</p>
+
+    <p>Caso vc nao tenha o adaptador USB ou queira conectar direto na porta GPIO, pode usar o esquema desse projeto, que apesar de ser Arduino, dá pra se basear nele: https://randomnerdtutorials.com/fingerprint-sensor-module-with-arduino/</p>
+
+    <p>Projeto com raspi e python para acionar fechadura trava elétrica: https://github.com/abreups/fechadura_eletrica e https://www.youtube.com/watch?v=E9Cb50f-zLg</p>
+
+    <p>O raspberry pi 3 reserva a porta /dev/ttyAMA0 para o bluetooth. Porém, essa é a porta mais rápida do raspberry. Se você quiser tirar ela do bluetooth para usar para conectar ao sensor fingerprint, faça o seguinte: https://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-including-pi-3-4/</p>
+
+    <p>Outra alternativa, talvez mais fácil, mas que não testei, é desabilitar o bluetooth, assim o ttyAMA0 volta para a porta padrão: https://www.raspberrypi.org/documentation/configuration/uart.md</p>
+
+    <p>Servidor web lightweight Flask para raspi: https://projects.raspberrypi.org/en/projects/python-web-server-with-flask</p>
+
+    <p>Usando o SQLite com o Flask: https://flask.palletsprojects.com/en/1.0.x/patterns/sqlite3/</p>
+
+    <p>tutorial de controle de relé com mqtt: https://www.dobitaobyte.com.br/controle-rele-porta-status-com-mqtt/</p>

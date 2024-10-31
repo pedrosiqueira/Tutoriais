@@ -1,0 +1,19 @@
+
+instalando wsl:
+https://github.com/microsoft/WSL/issues/2979#issuecomment-812863381
+1 executar powershell como administrador
+2 instale o wsl: "wsl --install"
+4 instale o lxrunoffline: https://github.com/DDoSolitary/LxRunOffline/releases
+5 acesse o powershell no modo admin
+6 garanta que não há nenhum wsl rodando atualmente: wsl --shutdown
+6b para listar os wsl rodando atualmente: wsl --list --running
+7 liste as versões instaladas do wsl: ".\LxRunOffline.exe list"
+7b atualmente, na release v3.5.0, se ocorrer o erro que não encontrou a chave de registro DistributionName, você pode apagar o seguinte registro no regedit: "Computador\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\AppxInstallerCache". Mas esse problema já foi corrigido na versão nightly build.
+microsoft store: terminal.
+8 mova o wsl desejado para outra pasta: .\Lxrunoffline.exe move -n Ubuntu -d C:\wsl\ubuntu
+8b Ubuntu é o nome do wsl desejado, conforme apresentado na lista do passo 7. C:\wsl\ubuntu é o caminho para a pasta onde quero mover o wsl.
+9 execute o wsl para ver se deu tudo certo: wsl -d Ubuntu
+10 no CMD de outro usuário que queira usar o wsl, registre o diretório acima como uma distribuição para este usuário: LxRunOffline register
+11 execute o wsl do outro usuário: wsl --distribution Ubuntu
+11b se ocorrer o erro "acesso negado", garanta que não há nenhum wsl rodando (passo 6). se o erro persistir, dê permissão de escrita ao usuário para a pasta onde a distro se encontra.
+obs.: talvez seja necessário: "menu iniciar --> ativar ou desativar recursos do windows --> habilitar Hyper-V". talvez seja necessário ativar o recurso hypervisor na bios.

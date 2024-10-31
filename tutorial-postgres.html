@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tutorial Postgres no Docker</title>
+    <style>
+        code {
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tutorial Postgres 16 no Docker</h1>
+    <p>Crie e execute um container postgres:</p>
+    <ul>
+        <li><code>docker run --name postgres-container -d -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword postgres</code></li>
+    </ul>
+    <p>As opções <code>--name</code> define o nome do container como <code>postgres-container</code> , <code>-d</code> executa em modo dettached, isto é, em segundo plano, <code>-p</code> mapeia a porta 5432 do computador para a porta 5432 do container, <code>-e</code> define a variável de ambiente <code>POSTGRES_PASSWORD</code> como <code>mysecretpassword</code>. Se a imagem do container não estiver disponível, tenta baixá-la do repositório oficial para assim conseguir criar o container. Por padrão, é criado o superusuário <code>postgres</code> e o banco de dados <code>postgres</code>. É possível alterar as informações de nome de usuário e de banco de dados definindo as variáveis de ambiente <code>POSTGRES_USER</code> e <code>POSTGRES_DB</code>. Mais informações <a href="https://hub.docker.com/_/postgres/">aqui</a>.</p>
+    <p>Este container já vem com as ferramentas padrão do postgres, como o servidor e o cliente, e é iniciado com o servidor já em execução.</p>
+    <p>Execute o cliente <code>psql</code> no container em execução <code>postgres-container</code>:</p>
+    <ul>
+        <li><code>docker exec -it postgres-container psql -U postgres -W</code></li>
+    </ul>
+    <p>As opções <code>-U</code> acessa o servidor como usuário <code>postgres</code>, <code>-W</code> solicita a senha para acessar o servidor. Por padrão, acessa o banco de dados com o mesmo nome do usuário. Para especificar um banco de dados diferente, acrescente a opção <code>-d</code> seguida pelo nome do banco de dados.</p>
+    <p>No cliente, crie um banco de dados e um usuário:</p>
+    <ul>
+        <li>
+            <pre><code>create database mydb;
+create user myuser with encrypted password 'mypass';</code></pre>
+        </li>
+    </ul>
+    <p>Por padrão, o postgres cria o esquema <code>public</code> para cada novo banco de dados. Atualmente, mesmo concedendo todos os privilégios em um banco de dados a um usuário com o comando <code>grant all privileges on database mydb to myuser;</code>, não lhe é permitido fazer nada nos esquemas do banco de dados. Portanto, você deve conectar ao banco de dados e conceder privilégio ao usuário no esquema desejado:</p>
+    <ul><li>
+        <pre><code>\c mydb
+grant all privileges on schema public to myuser;</code></pre>
+    </li></ul>
+    <p>Encerre o cliente com o sinal de EOF (<kbd>Ctrl+D</kbd> em unix) ou com o comando <code>\q</code>.</p>
+    <p>Encerre o servidor com o comando <code>docker stop postgres-container</code>.</p>
+</body>
+
+</html>
