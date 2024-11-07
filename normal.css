@@ -1,0 +1,24 @@
+        table.custom,
+        table.custom>thead>tr>th,
+        table.custom>tbody>tr>td,
+        table.custom>tbody>tr>th {
+            /* tabela centralizada e com bordas */
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+        }
+
+        table pre {
+            /* tags pre dentro de tabelas são alinhadas à esquerda, sem margem interna */
+            margin: 0;
+            text-align: left !important;
+        }
+
+        td:has(pre) {
+            /* tags pre dentro de tabela são alinhadas no topo */
+            vertical-align: top;
+        }
