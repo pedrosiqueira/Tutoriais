@@ -226,6 +226,14 @@ Instalações que não encontrei no apt (procure antes na loja de apps para mant
 Configurações extras:
 
 - Adicionar configurações de impressora wireless. Se solicitar senha, informe teu nome e senha de usuário. Se não tiver permissão, execute `sudo usermod -a -G lpadmin your-username` conforme [esse link](https://unix.stackexchange.com/a/513983/366802).
+- Instale o epson iProjection
+- No git, adicionar as seguintes configurações:
+    ```bash
+    git config --global core.pager "less -R -F -X" # qual programa o git utiliza para exibir o diff https://stackoverflow.com/a/73417842/4072641
+    git config --global pull.rebase true # como lidar com merges https://stackoverflow.com/a/16666418/4072641
+    git config --global user.name "$(read -p 'Enter Git user name: ' username; echo "$username")" # define o usuário
+    git config --global user.email "$(read -p 'Enter Git user email: ' useremail; echo "$useremail")" # define o e-mail do usuário
+    ```
 - No Mega, excluir as seguintes pastas da sincronização: `node_modules`, `__pycache__`.
 - No Recoll, configurações de índice:
   - Global parameters:
