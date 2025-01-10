@@ -230,7 +230,10 @@ Configurações extras:
 - No git, adicionar as seguintes configurações:
     ```bash
     git config --global core.pager "less -R -F -X" # qual programa o git utiliza para exibir o diff https://stackoverflow.com/a/73417842/4072641
+    git config --global core.eol lf # use LF em vez de CRLF nos repositórios GIT https://stackoverflow.com/q/1889559/4072641
+    git config --global core.autocrlf input # use LF em vez de CRLF nos repositórios GIT
     git config --global pull.rebase true # como lidar com merges https://stackoverflow.com/a/16666418/4072641
+    git config --global core.filemode false # ignora flags de permissões
     git config --global user.name "$(read -p 'Enter Git user name: ' username; echo "$username")" # define o usuário
     git config --global user.email "$(read -p 'Enter Git user email: ' useremail; echo "$useremail")" # define o e-mail do usuário
     ```

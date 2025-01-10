@@ -6,11 +6,9 @@ Instale o gerenciador de pacotes chocolatey.org. Execute no powershell como admi
 
 ## comandos de terminal
 
-Use LF em vez de CRLF nos repositórios GIT:
-
-    git config --global core.eol lf
-    git config --global core.autocrlf input
-
+    git config --global core.eol lf # use LF em vez de CRLF nos repositórios GIT https://stackoverflow.com/q/1889559/4072641
+    git config --global core.autocrlf input # use LF em vez de CRLF nos repositórios GIT
+    git config --global core.filemode false # ignora flags de permissões
 
 ## Desabilitar a busca na web no menu iniciar do Windows 10
 
