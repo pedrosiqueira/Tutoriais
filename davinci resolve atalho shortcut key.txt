@@ -1,6 +1,8 @@
 atalhos do davinci resolve
 
 shift+v: select clip at current playhead
+alt+click: select only audio or video clicked (to select several, ctrl+alt+click)
+y: select all clips forward
 shift+z: zoom all video
 m: marker. se estiver em cima do marker, abre opções do marker, como apagar ou editar
 alt+m: delete selected marker
@@ -20,4 +22,4 @@ l: normal speed timeline
 shift+k: play slow
 shift+j: fast reverse
 shift+r: freeze frame
-ctrl+r: retime control
+ctrl+r: retime control (acelera o vídeo para reduzir sua duração)
