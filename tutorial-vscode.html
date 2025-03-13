@@ -97,16 +97,39 @@
     <h2>Configurando o VS Code</h2>
     <p>Ao abrir o menu de configurações (<kbd>ctrl+,</kbd>), você pode procurar por qualquer configuração digitando no campo de busca. Por exemplo, para ativar a quebra virtual automática de linhas, ao digitar "wrap", deve aparecer uma configuração "Editor: Word Wrap", onde você pode alterar para "on".</p>
     <p>Configurações personalizadas são salvas num arquivo JSON, que no Linux fica localizado em <code>~/.config/Code/User/settings.json</code>. Para abrir o arquivo de configurações, você também pode teclar <kbd>f1</kbd>, digitar "sett js", e selecionar "Preferences: Open User Settings (JSON)". Eu, particularmente, gosto dessas configurações personalizadas, use-as se lhe convir:</p>
-    <pre>
-    {
-        "editor.wordWrap": "on", // habilita quebra virtual de linhas
-        "editor.mouseWheelZoom": true, // altera o zoom com a rodinha do mouse
-        "editor.unicodeHighlight.nonBasicASCII": false, // não destaca palavras com acento
-        "workbench.editor.empty.hint": "hidden", // desativa mensagem chata quando cria novo arquivo
-        "security.workspace.trust.enabled": "false", // confia em qualquer diretório por padrão
-        "html.format.wrapLineLength": 0 // não quebra linhas do html automaticamente
-    }
-</pre>
+    <pre>{
+    "black-formatter.args": [
+        "--line-length=255"
+    ],
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: LLVM, ColumnLimit: 255 }", // LLVM coloca a chave de abertura na mesma linha do identificador
+    "editor.mouseWheelZoom": true, // altera o zoom com a rodinha do mouse
+    "editor.wordWrap": "on", // habilita quebra virtual de linhas
+    "git.enableSmartCommit": true, // faz o commit direto, pulando o staging
+    "git.confirmSync": false, // faz o sync direto, sem solicitar confirmação
+    "git.openRepositoryInParentFolders": "always",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "svelte": true,
+        "python": false,
+        "javascript": true,
+        "typescript": true
+    },
+    "html.format.wrapLineLength": 0, // não quebra linhas do html automaticamente
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "diffEditor.ignoreTrimWhitespace": true
+    },
+    "security.workspace.trust.enabled": false, // confia em todos os projetos abertos
+    "svelte.enable-ts-plugin": true, // Enables a TypeScript plugin which provides intellisense for Svelte files inside TS/JS files
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.fontSize": 25,
+    "workbench.activityBar.location": "top",
+    "workbench.editor.empty.hint": "hidden", // confia em qualquer diretório por padrão
+    "xml.format.maxLineWidth": 0
+}</pre>
 
     <h2 id="configurando-alguns-atalhos">Configurando alguns atalhos</h2>
     <p>Abra o arquivo de atalhos (configuração "Open Keyboard Shortcuts (JSON)" ou caminho <code>~/.config/Code/User/keybindings.json</code> se estiver no linux) para configurar os atalhos. Coloque os seguintes atalhos que lhe convir:</p>
@@ -162,7 +185,7 @@
         "command": "editor.action.commentLine",
         "when": "editorTextFocus && !editorReadonly"
     },
-    { // alterna a visibilidade da barra de atividades (barra lateral) // "ctrl+abnt_c1" no windows
+    { // alterna a visibilidade da barra de atividades (barra lateral) // "ctrl+abnt_c1" no windows, ou "ctrl+[IntlRo]", dependendo do teclado
         "key": "ctrl+/",
         "command": "workbench.action.toggleActivityBarVisibility"
     },
@@ -184,6 +207,10 @@
         "key": "ctrl+f10",
         "command": "workbench.action.toggleMaximizedPanel"
     },
+    { // seleciona a ocorrência anterior da mesma palavra selecionada
+        "key": "ctrl+alt+d",
+        "command": "editor.action.addSelectionToPreviousFindMatch"
+    },
     { // remap toggle bold on extension yzhang.markdown-all-in-one
         "key": "ctrl+k b",
         "command": "markdown.extension.editing.toggleBold",
@@ -203,6 +230,11 @@
         "key": "ctrl+shift+v",
         "command": "-markdown.showPreview",
         "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    { // remove esse atalho do copilot, que sobrescreve comando de pular pra linha de baixo
+        "key": "ctrl+enter",
+        "command": "-github.copilot.generate",
+        "when": "editorTextFocus && github.copilot.activated && !commentEditorFocused"
     }
 ]</pre>
 

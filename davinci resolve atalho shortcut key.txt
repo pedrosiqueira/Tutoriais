@@ -23,3 +23,5 @@ shift+k: play slow
 shift+j: fast reverse
 shift+r: freeze frame
 ctrl+r: retime control (acelera o vídeo para reduzir sua duração)
+
+boa configuração de silêncio: detectar silêncios a partir de 100ms. Manter silêncio 200ms antes do corte e 270ms depois do corte, para manter inteiras as palavras que começam ou terminam baixinho. O tempo depois do corte é maior pois palavras que terminam com 's' são comuns e prolongadas, e vão diminuindo o som.
