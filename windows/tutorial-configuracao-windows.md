@@ -12,15 +12,22 @@ Instale o gerenciador de pacotes chocolatey.org. Execute no powershell como admi
 
 ## Desabilitar a busca na web no menu iniciar do Windows 10
 
-Abra o programa gpedit.msc → Local Computer Policy → Computer Configuration → Administrative Templates → Windows Components → Search → Do not allow web search, Don't search the web or display web results in search, Don't search the web or display web results in search over metered connections.
+[Execute no powershell](https://woshub.com/disable-web-search-windows-start-menu/):
+
+```
+if( -not (Test-Path -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer)){
+New-Item HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer
+}
+Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer -Name "DisableSearchBoxSuggestions" -Value 1 -Type DWORD
+```
 
 ## Outros
 
-1. Altere o navegador padrão para o chrome.
-2. Abra o `shell:startup` e adicione o script `abnt2-hotkeys.bat` com a linha `start "" D:\Mega\CodingProjects\PythonScripts\IndividualPythonScripts\abnt2-hotkeys.pyw`.
-3. Abra o `shell:startup` e adicione o script `concurso-prefeitura-tl.bat` com a linha `python D:\Mega\CodingProjects\PythonScripts\IndividualPythonScripts\concurso-prefeitura-tl.py`.
+1. Desative a opção “snap” de Quando eu ajustar uma janela, mostrar o que posso ajustar ao lado dela”.
+2. Altere o navegador padrão para o chrome.
+3. Abra o `shell:startup` e adicione o script `abnt2-hotkeys.bat` com a linha `start "" D:\Mega\CodingProjects\PythonScripts\IndividualPythonScripts\abnt2-hotkeys.pyw`.
 4. Abra o `shell:startup` e adicione o script `cpcb.bat` com a linha `start "" javaw -jar D:\Mega\CodingProjects\JavaProjects\cpcb\target\cpcb-1.0-SNAPSHOT.jar`.
-5. Desative a opção “snap” de Quando eu ajustar uma janela, mostrar o que posso ajustar ao lado dela”.
+5. Abra o `shell:startup` e adicione o script `concurso-prefeitura-tl.bat` com a linha `python D:\Mega\CodingProjects\PythonScripts\IndividualPythonScripts\concurso-prefeitura-tl.py`.
 
 ## Habilitar entrada sem senha
 

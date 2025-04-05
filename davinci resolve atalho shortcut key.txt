@@ -23,13 +23,14 @@ shift+k: play slow
 shift+j: fast reverse
 shift+r: freeze frame
 ctrl+r: retime control (acelera o vídeo para reduzir sua duração)
+r: altera velocidade do clipe
 
 Dicas:
 
-- boa configuração de silêncio: detectar silêncios a partir de 100ms. Manter silêncio 200ms antes do corte e 270ms depois do corte, para manter inteiras as palavras que começam ou terminam baixinho. O tempo depois do corte é maior pois palavras que terminam com 's' são comuns e prolongadas, e vão diminuindo o som.
 - para não mexer com formas, você pode acrescentar um texto emoji como forma, por exemplo, seta. para mover facilmente o texto, clique no ícone retangular chamado "transform" no canto inferior esquerdo da aba de preview, e mova a grade que surgir no vídeo de preview.
 - Para fazer vários clipes consecutivos se comportarem como um só no DaVinci Resolve, selecione os clipes consecutivos na Timeline, clique com o botão direito sobre os clipes selecionados e escolha "New Compound Clip".
+- boa configuração de silêncio: detectar silêncios a partir de 100ms. Manter silêncio 200ms antes do corte e 270ms depois do corte, para manter inteiras as palavras que começam ou terminam baixinho. O tempo depois do corte é maior pois palavras que terminam com 's' são comuns e prolongadas, e vão diminuindo o som.
 
-
+Dicas além do DaVinci Resolve:
 
 Para remover frames duplicados https://superuser.com/a/1706241/691930, quanto maior hi e lo, menor precisa ser a diferença entre frames consecutivos. ou seja, hi e lo igual a 1 remove apenas frames idênticos, o que raramente ocorre em vídeos renderizados, mesmo de imagens estáticas: `ffmpeg -i input.mkv -vf mpdecimate=hi=200:lo=200,setpts=N/FRAME_RATE/TB -an output.mkv`. O comando `-an` é opcional e remove também o audio.
