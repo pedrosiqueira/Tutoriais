@@ -199,6 +199,11 @@
         "command": "editor.action.insertCursorBelow",
         "when": "editorTextFocus"
     },
+    { // limpa o terminal
+        "key": "ctrl+l",
+        "command": "workbench.action.terminal.clear",
+        "when": "terminalFocusInAny && terminalHasBeenCreated"
+    },
     { // encerra o terminal atual
         "key": "ctrl+k delete",
         "command": "workbench.action.terminal.kill"
