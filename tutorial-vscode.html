@@ -64,6 +64,10 @@
 
     <h2>Atalhos comuns a outros editores de texto</h2>
     <ul>
+        <li>Duplo clique: Seleciona a palavra inteira.</li>
+        <li>Duplo clique e arrastar: Seleciona a palavra inteira e, à medida que arrasta o mouse, a seleção continua palavra por palavra.</li>
+        <li>Triplo clique: Seleciona a linha inteira.</li>
+        <li>Triplo clique e arrastar: Seleciona a linha inteira e, à medida que arrasta o mouse, a seleção continua linha por linha.</li>
         <li><kbd>ctrl+c</kbd> Copia o que estiver selecionado. Se nada estiver selecionado, copia a linha atual.</li>
         <li><kbd>ctrl+x</kbd> Recorta o que estiver selecionado. Se nada estiver selecionado, recorta a linha atual.</li>
         <li><kbd>ctrl+v</kbd> Cola o que foi copiado ou recortado.</li>
@@ -90,7 +94,8 @@
 
     <h2>Dicas</h2>
     <ul>
-        <li>Ao criar um arquivo (atalho ctrl+n), você pode passar o caminho do arquivo, que, se não existir, o vscode já cria pra você.</li>
+        <li>Ao criar um arquivo (atalho ctrl+n), você pode passar o caminho do arquivo, que, se não existir, o vscode já cria pra você. Por exemplo, <code>pasta_pai/pasta_filha/arquivo.txt</code> cria o <code>arquivo.txt</code> dentro de <code>pasta_filha</code>, dentro de <code>pasta_pai</code>.</li>
+        <li>Ao passar o mouse em cima do nome de um arquivo, é mostrada sua localização.</li>
         <li>"Leitura Obrigatória" para quem trabalha com HTML: <a href="https://docs.emmet.io/abbreviations/syntax/">Plugin Emmet já instalado no VSCode para edição de HTML</a>.</li>
     </ul>
 
@@ -104,8 +109,8 @@
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: LLVM, ColumnLimit: 255 }", // LLVM coloca a chave de abertura na mesma linha do identificador
     "editor.mouseWheelZoom": true, // altera o zoom com a rodinha do mouse
     "editor.wordWrap": "on", // habilita quebra virtual de linhas
-    "git.enableSmartCommit": true, // faz o commit direto, pulando o staging
     "git.confirmSync": false, // faz o sync direto, sem solicitar confirmação
+    "git.enableSmartCommit": true, // faz o commit direto, pulando o staging
     "git.openRepositoryInParentFolders": "always",
     "github.copilot.enable": {
         "*": false,
@@ -267,7 +272,7 @@
             "end",
             "wrap"
         ],
-        "when": "editorTextFocus && editorLangId == html" // if html only
+        "when": "editorTextFocus && (editorLangId == 'html' || editorLangId == 'xml' || editorLangId == 'svelte')"
     },
     { // https://stackoverflow.com/a/63061477/4072641
         "key": "ctrl+alt+,", // go to previous
@@ -279,7 +284,7 @@
             "end",
             "wrap"
         ],
-        "when": "editorTextFocus && editorLangId == html" // if html only
+        "when": "editorTextFocus && (editorLangId == 'html' || editorLangId == 'xml' || editorLangId == 'svelte')"
     }
     </pre>
 
